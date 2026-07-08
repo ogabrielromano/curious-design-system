@@ -2,6 +2,7 @@
 
 Fonte única de verdade da identidade visual da Curious (staycurious.com.br).
 Manual online: https://claude.ai/code/artifact/963335a9-1813-49df-8cbe-a8fd9b34d90a
+Repositório: https://github.com/ogabrielromano/curious-design-system (privado)
 
 ## Estrutura da pasta
 
