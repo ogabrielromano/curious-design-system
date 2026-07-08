@@ -16,10 +16,10 @@ Repositório: https://github.com/ogabrielromano/curious-design-system (público)
 
 ## Como publicar o manual no domínio
 
-O manual é publicado automaticamente pelo **GitHub Pages** a partir da pasta `docs/` (branch `main`):
+O manual é publicado automaticamente a cada `git push` (pasta `docs/`, branch `main`) em dois lugares:
 
-- URL do Pages: https://ogabrielromano.github.io/curious-design-system/
-- Domínio próprio: `marca.staycurious.com.br` (configurado via `docs/CNAME` — requer um registro DNS `CNAME marca → ogabrielromano.github.io` no provedor do domínio).
+- **Vercel (link de compartilhamento):** https://curious-design-system.vercel.app
+- GitHub Pages: https://ogabrielromano.github.io/curious-design-system/ · domínio próprio `marca.staycurious.com.br` (via `docs/CNAME` — requer registro DNS `CNAME marca → ogabrielromano.github.io` no provedor do domínio).
 
 Ao atualizar a identidade: edite o manual, substitua o `docs/index.html`, mantenha `Logos/`, `Fontes/` e `Diretrizes IA/` em sincronia e faça `git push` — o site publica sozinho em ~1 minuto.
 
