@@ -39,6 +39,36 @@ Regras de contraste (WCAG AA):
 - `#8E8E8E` sobre branco: só em números grandes (≥ 24 px) e gráficos.
 - `#E0E0E0`: nunca para texto — só linhas e divisores.
 
+### 2.1 Cores semânticas (APENAS em dados, dashboards e análises)
+
+A regra monocromática vale para a marca. Em **dashboards, relatórios e análises**, verde e vermelho são liberados para UMA função: sinalizar **positivo e negativo**. Não são cor de acento nem decoração.
+
+| Sinal | Uso | HEX (tema claro) | HEX (tema escuro) |
+|---|---|---|---|
+| Positivo | Crescimento, meta batida, saldo favorável | `#0E8A4A` | `#34C77B` |
+| Negativo | Queda, meta perdida, alerta | `#D02B2B` | `#FF6B5E` |
+
+Tokens CSS (adicione aos da seção 2):
+
+```css
+:root{
+  --curious-pos:#0E8A4A; --curious-neg:#D02B2B;
+  --curious-pos-soft:#E7F4EC; --curious-neg-soft:#FBE9E9;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --curious-pos:#34C77B; --curious-neg:#FF6B5E;
+    --curious-pos-soft:#12281D; --curious-neg-soft:#301717;
+  }
+}
+```
+
+Regras obrigatórias para verde/vermelho:
+- **Só em dados**: KPIs, variações (%), gráficos, tabelas de resultado, status. **Nunca** em títulos, botões, ícones decorativos, fundos ou formas "para dar cor".
+- **Nunca cor sozinha**: acompanhe sempre de sinal (`+`/`−`), seta (▲/▼) ou rótulo — para funcionar em P&B e para daltônicos.
+- **O significado manda, não a direção**: um custo (CAC) que cai é VERDE; um churn que sobe é VERMELHO. Defina no contexto o que é positivo antes de colorir.
+- Amarelo/laranja (atenção) **não** são autorizados sem aprovação do responsável de marca.
+
 ## 3. Tipografia
 
 - **Fonte única para tudo: Aileron** (sans-serif, gratuita). Fallbacks, nesta ordem: `Aileron, "Helvetica Neue", Helvetica, Arial, sans-serif`.
@@ -85,6 +115,7 @@ Os 5 tipos de slide (não invente outros):
 ## 7. Gráficos e dados
 
 - Série ou dado de destaque em **preto `#181818` sólido**; todas as outras séries em `#E0E0E0` e `#8E8E8E`. **Um gráfico, um destaque.**
+- **Verde/vermelho (seção 2.1) só quando o gráfico compara positivo vs. negativo** (variações, saldos, metas). Fora disso, o padrão é preto + cinzas. Sempre com sinal/seta junto do valor.
 - Sem 3D, sem sombras, sem gradientes, sem mais de 5 fatias em pizza (prefira barras).
 - Grid do gráfico discreto em `#E0E0E0`; eixos sem moldura.
 - Todo gráfico cita **fonte e período** em 11–12 pt `#5F5F5F`.
@@ -100,7 +131,7 @@ Confiante, direta, específica. Português claro.
 
 ## 9. Checklist final (a IA deve conferir antes de entregar)
 
-1. Nenhuma cor fora da paleta da seção 2 (nem em gráficos, links ou botões).
+1. Nenhuma cor fora da paleta da seção 2 — exceto verde/vermelho da seção 2.1, e SÓ em dados (com sinal/seta, nunca em título/botão/decoração).
 2. Uma única família tipográfica (Aileron ou fallback), máximo 2 pesos por superfície.
 3. Nenhum emoji, ícone decorativo, sombra, gradiente ou efeito.
 4. Destaques feitos com peso/escala/contraste, não com cor.
@@ -124,4 +155,4 @@ Símbolo ¿ isolado (mesmos paths do glifo, viewBox recortado):
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="374 -2 112 197" role="img" aria-label="Curious"><path fill="currentColor" d="M420.97,192.09c-2.81-.64-5.06-1.44-7.39-1.91-9.19-1.84-17.56-5.48-25.05-11.12-4.03-3.03-7.32-6.75-9.87-11.11-2.46-4.21-4.04-8.65-3.75-13.67.19-3.31.09-6.65.04-9.97-.04-3.01.64-5.85,1.8-8.6,2.53-6,5.79-11.59,10.14-16.42,3.83-4.25,7.94-8.25,12.04-12.23,6.1-5.91,12.31-11.71,18.45-17.57,6.92-6.61,12.02-14.43,15.51-23.33.4-1.03.77-2.08,1.23-3.08.47-1.04,1.15-1.91,2.46-1.88,1.3.04,1.99.95,2.43,1.98.86,2.04,1.68,4.1,2.34,6.2,3.7,11.78,7.35,23.59,11.01,35.38.11.34.07.73.13,1.55-1.14,1.26-2.48,2.76-3.83,4.24-5.84,6.42-11.73,12.79-17.5,19.28-4.3,4.84-8.14,10.04-10.92,15.94-2.91,6.19-4.12,12.62-2.57,19.38,1.93,8.41,9.14,14.38,17.77,14.8,1.29.06,2.59-.02,3.88,0,2.14.05,3.98-.67,5.59-2.03.99-.83,1.96-1.68,2.92-2.55,6.56-5.96,13.14-11.9,19.67-17.89,3.26-3,6.45-6.08,9.66-9.14,1.99-1.9,3.97-3.8,6.46-4.67.43.16.64.19.77.3.11.1.19.3.2.46.07,1.1.16,2.21.16,3.31.01,11.43,0,22.86,0,34.42-9.36,5.16-19.46,7.25-29.89,9.56-11.35.28-22.38.31-33.92.35Z"/><path fill="currentColor" d="M445.87,1.3c1.46.77,3.02,1.41,4.38,2.34,6.93,4.77,10.43,11.46,9.74,19.8-.8,9.67-6.48,15.73-15.54,18.75-.85.28-1.82.29-2.73.3-3.32.06-6.64-.05-9.95.11-4.32.21-7.95-1.41-11.17-4.01-4.95-4-7.59-9.42-8.76-15.55-.57-2.98.48-5.85,1.62-8.58,2.38-5.67,6.47-9.76,12.49-12.83,1.15-.57,1.67-.92,2.19-1.27.5-.04,1-.08,2.35-.16,4.22-.1,7.58-.16,10.94-.21.49.12.97.25,2,.66,1.18.4,1.81.52,2.44.64Z"/></svg>
 ```
 
-*Curious — Design System v1.5 · julho 2026 · manual completo: peça o link ao responsável de marca.*
+*Curious — Design System v1.7 · julho 2026 · manual completo: peça o link ao responsável de marca.*
