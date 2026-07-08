@@ -268,6 +268,38 @@
 
   footer.end{margin-top:80px;padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13px}
   footer.end svg{width:96px;color:var(--ink)}
+
+  /* ---------- motion ---------- */
+  body{transition:background-color .35s ease,color .35s ease}
+  a{transition:color .2s ease,opacity .2s ease}
+  nav.toc a{transition:background-color .25s ease,color .25s ease}
+  nav.toc a.on{color:var(--text);background:var(--surface)}
+  nav.toc a.on .n{font-weight:700}
+  .logo-card,.swatch,.dont,.mark-use,.voice,.dl,.slide{
+    transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease,border-color .4s ease;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .logo-card:hover,.swatch:hover,.dont:hover,.mark-use:hover,.voice:hover{
+      transform:translateY(-4px);border-color:var(--muted);
+      box-shadow:0 14px 34px -14px rgba(0,0,0,.22);
+    }
+    .slide-item:hover .slide{transform:translateY(-4px);box-shadow:0 18px 42px -16px rgba(0,0,0,.3)}
+    .dl:hover{transform:translateY(-3px);box-shadow:0 14px 34px -14px rgba(0,0,0,.35)}
+    a.btn-paper{transition:transform .25s cubic-bezier(.2,.7,.2,1),opacity .2s ease}
+    a.btn-paper:hover{transform:translateY(-2px)}
+    .ai-callout > svg{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+    .ai-callout:hover > svg{transform:rotate(-5deg) scale(1.06)}
+    .eyebrow::after{transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1) .15s;transform:scaleX(0)}
+    .rv.in .eyebrow::after,.eyebrow.rv.in::after{transform:scaleX(1)}
+    .rv{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+    .rv.in{opacity:1;transform:translateY(0)}
+    @keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    header.hero .hero-logo{animation:riseIn .7s cubic-bezier(.2,.7,.2,1) both}
+    header.hero h1{animation:riseIn .7s .1s cubic-bezier(.2,.7,.2,1) both}
+    header.hero .sub{animation:riseIn .7s .18s cubic-bezier(.2,.7,.2,1) both}
+    header.hero .hero-tags{animation:riseIn .7s .26s cubic-bezier(.2,.7,.2,1) both}
+    header.hero .ai-callout{animation:riseIn .7s .36s cubic-bezier(.2,.7,.2,1) both}
+  }
 </style>
 
 <!-- glyph symbols extracted from curious_logotype.svg (Cambon Bold outlines) -->
@@ -717,3 +749,48 @@
 </footer>
 </main>
 </div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll */
+  if(!reduce && 'IntersectionObserver' in window){
+    var sels = ['.ch .eyebrow','.ch h2','.ch .lead','.ch h3','.ch > p','.note',
+      '.logo-grid > *','.swatch-grid > *','.dont-grid > *','.mark-uses > *',
+      '.voice-grid > *','.slide-grid > *','.dl-grid > *','.type-scale','.specimen',
+      '.ratio-bar','.contrast','.clearspace','ul.rules','ol.check','table.files','footer.end'];
+    var els = document.querySelectorAll(sels.join(','));
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.05});
+    els.forEach(function(el){
+      el.classList.add('rv');
+      var p = el.parentElement;
+      if(p && /-grid|mark-uses/.test(p.className)){
+        var i = Array.prototype.indexOf.call(p.children, el);
+        el.style.transitionDelay = (i % 9) * 60 + 'ms';
+      }
+      io.observe(el);
+    });
+  }
+
+  /* scrollspy no sumário */
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a[href^="#"]'));
+  if(links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting && map[e.target.id]){
+          links.forEach(function(l){ l.classList.remove('on'); });
+          map[e.target.id].classList.add('on');
+        }
+      });
+    }, {rootMargin:'-15% 0px -75% 0px'});
+    document.querySelectorAll('section.ch').forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
