@@ -2,13 +2,13 @@
 
 Fonte única de verdade da identidade visual da Curious (staycurious.com.br).
 Manual online: https://claude.ai/code/artifact/963335a9-1813-49df-8cbe-a8fd9b34d90a
-Repositório: https://github.com/ogabrielromano/curious-design-system (privado)
+Repositório: https://github.com/ogabrielromano/curious-design-system (público)
 
 ## Estrutura da pasta
 
 | Pasta | Conteúdo |
 |---|---|
-| `Site/` | `index.html` — o manual completo, autocontido (fontes, logos e downloads embutidos). **É este arquivo que sobe para o domínio.** |
+|  `docs/` | `index.html` — o manual completo, autocontido (fontes, logos e downloads embutidos). **É este arquivo que sobe para o domínio.** |
 | `Logos/` | Arquivos oficiais da marca: logotipo e símbolo ¿ em SVG (vetorial, em curvas) e PNG (fundo branco/preto). |
 | `Fontes/` | `Aileron - Fonte Curious.zip` — Regular, Italic, SemiBold, Bold e Black (licença CC0, uso livre). A Cambon (fonte do logo) é comercial e não fica aqui. |
 | `Diretrizes IA/` | `curious-diretrizes-ia.md` — cole em qualquer IA junto com o pedido para o material sair na identidade da marca. |
@@ -16,12 +16,12 @@ Repositório: https://github.com/ogabrielromano/curious-design-system (privado)
 
 ## Como publicar o manual no domínio
 
-O `Site/index.html` é um arquivo único, sem dependências — basta hospedar:
+O manual é publicado automaticamente pelo **GitHub Pages** a partir da pasta `docs/` (branch `main`):
 
-- **Subdomínio (recomendado):** crie `marca.staycurious.com.br` apontando para qualquer hospedagem estática (Netlify, Vercel, Cloudflare Pages, ou o próprio servidor) e suba o `index.html`.
-- **Caminho no site atual:** se o site principal permitir (Framer tem limitações para páginas custom), suba como `staycurious.com.br/marca/index.html`.
+- URL do Pages: https://ogabrielromano.github.io/curious-design-system/
+- Domínio próprio: `marca.staycurious.com.br` (configurado via `docs/CNAME` — requer um registro DNS `CNAME marca → ogabrielromano.github.io` no provedor do domínio).
 
-Ao atualizar a identidade: edite o manual, substitua o `index.html` e mantenha os arquivos de `Logos/`, `Fontes/` e `Diretrizes IA/` em sincronia — o manual é a referência final.
+Ao atualizar a identidade: edite o manual, substitua o `docs/index.html`, mantenha `Logos/`, `Fontes/` e `Diretrizes IA/` em sincronia e faça `git push` — o site publica sozinho em ~1 minuto.
 
 ## Regras de ouro (resumo)
 
